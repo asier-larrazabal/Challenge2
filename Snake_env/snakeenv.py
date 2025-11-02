@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import random
 
-SNAKE_LEN_GOAL = 30
+SNAKE_LEN_GOAL = 2500
 
 class SnakeEnv(gym.Env):
     metadata = {'render_modes': ['human', 'rgb_array'], 'render_fps': 10}
@@ -32,9 +32,9 @@ class SnakeEnv(gym.Env):
         
         # Performance tracking
         self.episode_steps = 0
-        self.max_steps = 1000
+        self.max_steps = float('inf')
         self.steps_since_apple = 0
-        self.max_steps_without_apple = 100
+        self.max_steps_without_apple = 500
         
         # Visualization
         if render_mode == 'human':
@@ -169,9 +169,9 @@ class SnakeEnv(gym.Env):
             truncated = True
         
         # Victory condition
-        if len(self.snake_position) >= SNAKE_LEN_GOAL:
-            reward = 100.0
-            terminated = True
+#        if len(self.snake_position) >= SNAKE_LEN_GOAL:
+#            reward = 100.0
+#            terminated = True
         
         observation = self._get_observation()
         info = {
